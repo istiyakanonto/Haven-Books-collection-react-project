@@ -1,12 +1,13 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "./firebase.config";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./Login.css";
-import { library } from "@fortawesome/fontawesome-svg-core";
+
 import { faGoogle, faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { UserContext } from "../../App";
+import { useHistory, useLocation } from "react-router";
 firebase.initializeApp(firebaseConfig);
 function Login() {
   const [newUser, setNewUser] = useState(false);
@@ -17,6 +18,10 @@ function Login() {
     password: "",
     photo: "",
   });
+  const history=useHistory();
+  const location=useLocation();
+  let { from } = location.state || { from: { pathname: "/" } };
+  const [loggedInUser,setLoggedInUser] = useContext(UserContext)
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   const fbProvider = new firebase.auth.FacebookAuthProvider();
   const handleIn = () => {
@@ -32,7 +37,9 @@ function Login() {
           photo: photoURL,
         };
         setUser(signedInUser);
-        console.log(displayName, email, photoURL);
+        setLoggedInUser(signedInUser);
+        history.replace(from);
+       
       })
       .catch((error) => {
         console.log(error);
@@ -49,10 +56,11 @@ function Login() {
 
         // The signed-in user info.
         var user = result.user;
-        console.log("fb use after sign in", user);
+        setLoggedInUser(user);
+        history.replace(from);
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        var accessToken = credential.accessToken;
-
+       
+    
         // ...
       })
       .catch((error) => {
@@ -134,7 +142,8 @@ function Login() {
           newUserInfo.error = "";
           newUserInfo.success = true;
           setUser(newUserInfo);
-          console.log("sign in user info", res.user);
+          setLoggedInUser(newUserInfo);
+          history.replace(from);
         })
         .catch((error) => {
           const newUserInfo = { ...user };
