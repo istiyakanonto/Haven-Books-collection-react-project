@@ -13,7 +13,7 @@ const Home = () => {
       
       
     return (
-        <div style={{marginBottom:'20px'}} className="container book-style">
+        <div className="container book-style">
  <div  className="row">
               {
               bookCollection.map(book => <BookCollection book={book}></BookCollection>)

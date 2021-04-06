@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './BookCollection.css'
+
 const BookCollection = ({book})=>{
-    console.log(book.pic)
+    
     return (
         <div className="col-md-4">
            
@@ -22,7 +24,10 @@ const BookCollection = ({book})=>{
     <div class="stat border">
       <div class="value">Wanna Buy??</div>
       <div class="type">
-          <button style={{backgroundColor:'cyan'}}>Buy Now</button></div>
+          <Link to={`/checkout/${book._id}`}><button  style={{backgroundColor:'cyan'}}>Checkout</button></Link>
+        
+          
+          </div>
     </div>
     <div class="stat">
       <div class="value">Discount Price</div>

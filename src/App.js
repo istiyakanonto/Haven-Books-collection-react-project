@@ -8,13 +8,19 @@ import NotFound from "./components/NotFound/NotFound";
 import Header from "./components/Header/Header";
 import { createContext, useState } from "react";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Checkout from "./components/Checkout/Checkout";
 
-
+// export const InformationContext=createContext();
 export const UserContext=createContext();
+
 function App() {
+
   const [loggedInUser, setLoggedInUser]=useState({});
   return (
     <div className="App">
+     
+     
+    
  <UserContext.Provider value={[loggedInUser,setLoggedInUser]}>
     <Router>
       <h4 style={{color:''}}>Email ID: {loggedInUser.email}</h4>
@@ -23,6 +29,11 @@ function App() {
         <Route path="/home">
           <Home></Home>
         </Route>
+
+<PrivateRoute path="/checkout/:_id">
+
+<Checkout></Checkout>
+</PrivateRoute>
 
         
         <PrivateRoute path="/orders">
