@@ -1,9 +1,9 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyCRlIacjuNM-FjW1ozteXAV56L11-hVDqM",
-    authDomain: "ema-john-version.firebaseapp.com",
-    projectId: "ema-john-version",
-    storageBucket: "ema-john-version.appspot.com",
-    messagingSenderId: "1077689746216",
-    appId: "1:1077689746216:web:e79aa8c13150acad10461d"
-  };
-  export default firebaseConfig;
+  apiKey: "AIzaSyD0qb2dVJw_oLjpVg3eLCuKd9iPufmJBFI",
+  authDomain: "haven-collection.firebaseapp.com",
+  projectId: "haven-collection",
+  storageBucket: "haven-collection.appspot.com",
+  messagingSenderId: "1066379128887",
+  appId: "1:1066379128887:web:468a461e6130fbf7e24fb2"
+};
+export default firebaseConfig;

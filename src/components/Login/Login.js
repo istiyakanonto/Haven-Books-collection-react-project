@@ -18,10 +18,10 @@ function Login() {
     password: "",
     photo: "",
   });
-  const history=useHistory();
-  const location=useLocation();
+  const history = useHistory();
+  const location = useLocation();
   let { from } = location.state || { from: { pathname: "/" } };
-  const [loggedInUser,setLoggedInUser] = useContext(UserContext)
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   const fbProvider = new firebase.auth.FacebookAuthProvider();
   const handleIn = () => {
@@ -39,11 +39,9 @@ function Login() {
         setUser(signedInUser);
         setLoggedInUser(signedInUser);
         history.replace(from);
-       
       })
       .catch((error) => {
         console.log(error);
-       
       });
   };
   const handleFbSignIn = () => {
@@ -59,9 +57,6 @@ function Login() {
         setLoggedInUser(user);
         history.replace(from);
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-       
-    
-        // ...
       })
       .catch((error) => {
         // Handle Errors here.
@@ -173,84 +168,80 @@ function Login() {
   return (
     <div className="container body ">
       <div className="box">
-          
-      <h1 className="icon">Authentication</h1>
-          <div className="content">
-
-
-        <input
-          type="checkbox"
-          onChange={() => setNewUser(!newUser)}
-          name="newUser"
-          id=""
-        />
-        <label style={{ color: "brown" }} htmlFor="newUser">
-          New User Sign Up??
-        </label>
-        <form onSubmit={handleSubmit}>
-          {newUser && (
+        <h1 className="icon">Authentication</h1>
+        <div className="content">
+          <input
+            type="checkbox"
+            onChange={() => setNewUser(!newUser)}
+            name="newUser"
+            id=""
+          />
+          <label style={{ color: "brown" }} htmlFor="newUser">
+            New User Sign Up??
+          </label>
+          <form onSubmit={handleSubmit}>
+            {newUser && (
+              <input
+                name="name"
+                type="text"
+                onBlur={handleChange}
+                placeholder="Your name"
+              />
+            )}
+            <br />
             <input
-              name="name"
               type="text"
+              name="email"
               onBlur={handleChange}
-              placeholder="Your name"
+              placeholder="Email"
+              required
             />
+            <br />
+            <input
+              type="password"
+              name="password"
+              onBlur={handleChange}
+              placeholder="Password"
+              required
+            />
+            <br />
+            <input
+              className="btn btn3"
+              type="submit"
+              value={newUser ? "Sing Up" : "sign In"}
+            />
+          </form>
+          <p style={{ color: "red" }}>{user.error}</p>
+          {user.success && (
+            <p style={{ color: "white", fontWeight: "600" }}>
+              {" "}
+              User {newUser ? "created" : "Logged In"} successfully
+            </p>
+          )}
+
+          {user.isSignedIn ? (
+            <button className="btn btn1" onClick={handleOut}>
+              Sign out From Google
+            </button>
+          ) : (
+            <button className="btn btn1" onClick={handleIn}>
+              {" "}
+              <FontAwesomeIcon icon={faGoogle} /> Sign in With Google Account
+            </button>
           )}
           <br />
-          <input
-            type="text"
-            name="email"
-            onBlur={handleChange}
-            placeholder="Email"
-            required
-          />
-          <br />
-          <input
-            type="password"
-            name="password"
-            onBlur={handleChange}
-            placeholder="Password"
-            required
-          />
-          <br />
-          <input
-            className="btn btn3"
-            type="submit"
-            value={newUser ? "Sing Up" : "sign In"}
-          />
-        </form>
-        <p style={{ color: "red" }}>{user.error}</p>
-        {user.success && (
-          <p style={{ color: "white",fontWeight: "600" }}>
+          <button className="btn btn2" onClick={handleFbSignIn}>
             {" "}
-            User {newUser ? "created" : "Logged In"} successfully
-          </p>
-        )}
-
-        {user.isSignedIn ? (
-          <button className="btn btn1" onClick={handleOut}>Sign out From Google</button>
-        ) : (
-          <button className="btn btn1" onClick={handleIn}>
-            {" "}
-            <FontAwesomeIcon icon={faGoogle} /> Sign in With Google Account
+            <FontAwesomeIcon icon={faFacebookF} /> Sign in With Facebook Login
           </button>
-        )}
-        <br />
-        <button className="btn btn2" onClick={handleFbSignIn}>
-          {" "}
-          <FontAwesomeIcon icon={faFacebookF} /> Sign in With Facebook Login
-        </button>
-        {user.isSignedIn && (
-          <div>
-            <h1>Welcome: {user.name}</h1>
-            <p> Your Email: {user.email}</p>
-            <img src={user.photo} alt="Error" />
-          </div>
-        )}
-
-
-          </div>
-       
+          {user.isSignedIn && (
+            <div>
+              <h1>Welcome: {user.name}</h1>
+              <p> Your Email: {user.email}</p>
+              <img src={user.photo} alt="Error" />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

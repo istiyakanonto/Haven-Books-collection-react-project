@@ -8,10 +8,7 @@
   body {
     font-family: 'Roboto', sans-serif;
   }
- 
-  
-  
-  ul li:hover a{
+ ul li:hover a{
     padding-left: 50px;
   }
   .sidebar ul a i{
