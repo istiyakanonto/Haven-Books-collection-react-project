@@ -11,11 +11,18 @@ const Orders = () => {
        .then(res=>res.json())
        .then(data=>setOrdersInformation(data))
    },[])
-  
+  let total=0;
+  for (let index = 0; index < ordersInformation.length; index++) {
+       total = total + parseInt(ordersInformation[index].price);
+      
+  }
+
     return (
-        <div>
+        <div className="container">
+            <h2 style={{marginTop:'20px',marginBottom:'10px',color:'#420420'}}>Greeting..{loggedInUser.name}</h2>
+            <p>Your Total Buying Books {ordersInformation.length}</p>
             {
-                ordersInformation.map(order=> <Table className="container" striped bordered hover variant="dark">
+                ordersInformation.map(order=> <Table style={{borderBottom: '1px solid red'}} className="container" striped bordered hover variant="dark">
                 <thead>
                   <tr>
                     <th>Customer Name</th>
@@ -36,9 +43,13 @@ const Orders = () => {
                     <td>{order.dateTime}</td>
                   </tr>
                   
+                  
                 </tbody>
               </Table>)
+              
             }
+            <h1 style={{textAlign: 'center',color: '#420420'}}>Your Total Cost {total} </h1>
+
         </div>
     );
 };

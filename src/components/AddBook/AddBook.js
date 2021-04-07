@@ -65,7 +65,7 @@ const AddBook = () => {
           <div style={{marginTop:'15px',marginRight:"150px"}} className="row">
           <div className="col-md-9">
           <p>Add Price</p>
-          <input {...register("price", { required: true })} placeholder="Price" />
+          <input {...register("price", { required: true })}  placeholder="Price" />
           </div>
           <div className="col-md-3">
           <p>Upload Book Photo</p>

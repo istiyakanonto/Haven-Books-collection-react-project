@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './BookCollection.css'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faShoppingBag}  from '@fortawesome/free-solid-svg-icons'
 const BookCollection = ({book})=>{
     
     return (
@@ -24,7 +25,7 @@ const BookCollection = ({book})=>{
     <div class="stat border">
       <div class="value">Wanna Buy??</div>
       <div class="type">
-          <Link to={`/checkout/${book._id}`}><button  style={{backgroundColor:'cyan'}}>Checkout</button></Link>
+          <Link to={`/checkout/${book._id}`}><button  style={{backgroundColor:'#420420',color:'white'}}>  Buy Now  <FontAwesomeIcon icon={ faShoppingBag} /></button></Link>
         
           
           </div>

@@ -11,10 +11,15 @@ const ManageBook = () => {
         .then(data=>setManageBook(data))
     },)
 
-    function handleDelete(id) {
-
-        console.log("clicked")
-    }
+ const handleDelete=id=>{
+     fetch(`http://localhost:5050/itemDelete/${id}`,{
+         method: 'DELETE',
+     })
+     .then(res=>res.json())
+     .then(result=>{
+         console.log(result)
+     })
+ }
     return (
         <div>
             {
@@ -35,9 +40,9 @@ manageBook.map(book=><Table className="container" striped bordered hover variant
     <td>{book.authorName}</td>
     <td>{book.price} $</td>
     <td> 
-    <button style={{backgroundColor:'#dd0000'}} onClick={()=>handleDelete(book._id)}>  <FontAwesomeIcon icon={faTrashAlt} /></button>
+    <button style={{backgroundColor:'red'}}><FontAwesomeIcon icon={faTrashAlt} onClick={()=>handleDelete(book._id)} /></button>
 
-<button style={{backgroundColor:'#40b000'}}>  <FontAwesomeIcon icon={ faEdit} /></button>
+<button style={{backgroundColor:'cyan'}}>  <FontAwesomeIcon icon={ faEdit} /></button>
     
    
     </td>
